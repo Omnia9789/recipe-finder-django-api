@@ -113,18 +113,17 @@ Authorization: Token your_token_here
 
 ---
 
-## 📸 Screenshots
+<h2>📸 Screenshots</h2>
 
-*(Add your screenshots inside a folder named `screenshots/` and link them below)*
+<h3>Recipe Finder</h3>
+<img src="screenshots/WhatsApp%20Image%202026-02-16%20at%207.34.15%20PM.jpeg" width="600">
 
-### Homepage
-![Homepage](screenshots/home.png)
+<h3>Recipe Details</h3>
+<img src="screenshots/WhatsApp%20Image%202026-02-16%20at%207.34.15%20PM%20(1).jpeg" width="600">
 
-### Recipe List
-![Recipe List](screenshots/recipe-list.png)
+<h3>Admin Dashboard</h3>
+<img src="screenshots/admindashboard.png" width="600">
 
-### Admin Panel
-![Admin Panel](screenshots/admin-panel.png)
 
 ---
 
