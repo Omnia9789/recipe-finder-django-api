@@ -11,6 +11,7 @@ import uuid
 from django.contrib.auth.decorators import login_required, user_passes_test
 
 
+
 def login_page(request):
     return render(request, 'recipes/Login.html')
 
@@ -505,16 +506,16 @@ def update_recipe(request, recipe_id):
         return JsonResponse({"error": "Invalid request method."}, status=400)
 # Create your views here.
 # views.py
-from rest_framework import generics
+# from rest_framework import generics
 from .models import Recipe
-from .serializers import RecipeSerializer
-from rest_framework.filters import SearchFilter
+# from .serializers import RecipeSerializer
+# from rest_framework.filters import SearchFilter
 
-class RecipeSearchAPIView(generics.ListAPIView):
-    queryset = Recipe.objects.all()
-    serializer_class = RecipeSerializer
-    filter_backends = [SearchFilter]
-    search_fields = ['name']
+# class RecipeSearchAPIView(generics.ListAPIView):
+#     queryset = Recipe.objects.all()
+#     serializer_class = RecipeSerializer
+#     filter_backends = [SearchFilter]
+#     search_fields = ['name']
 
 def is_admin(user):
     return hasattr(user, 'profile') and user.profile.is_admin
@@ -587,57 +588,57 @@ def update_recipe(request, recipe_id):
         return JsonResponse({'error': str(e)}, status=500)
 
 
-class RecipeCreateView(APIView):
-    parser_classes = [MultiPartParser, FormParser]
+# class RecipeCreateView(APIView):
+#     parser_classes = [MultiPartParser, FormParser]
 
-    def post(self, request, format=None):
-        try:
-            # قراءة البيانات من request
-            name = request.data.get("name")
-            course_name = request.data.get("courseName")
-            description = request.data.get("description")
-            time = request.data.get("time")
-            image = request.FILES.get("image")
+#     def post(self, request, format=None):
+#         try:
+#             # قراءة البيانات من request
+#             name = request.data.get("name")
+#             course_name = request.data.get("courseName")
+#             description = request.data.get("description")
+#             time = request.data.get("time")
+#             image = request.FILES.get("image")
 
-            ingredients_data = request.data.get("ingredients")
-            instructions_data = request.data.get("instructions")
+#             ingredients_data = request.data.get("ingredients")
+#             instructions_data = request.data.get("instructions")
 
-            if not all([name, time, ingredients_data, instructions_data]):
-                return Response({"error": "Missing required fields."}, status=status.HTTP_400_BAD_REQUEST)
+#             if not all([name, time, ingredients_data, instructions_data]):
+#                 return Response({"error": "Missing required fields."}, status=status.HTTP_400_BAD_REQUEST)
 
-            # تحويل الـ JSON strings إلى Python lists
-            import json
-            ingredients = json.loads(ingredients_data)
-            instructions = json.loads(instructions_data)
+#             # تحويل الـ JSON strings إلى Python lists
+#             import json
+#             ingredients = json.loads(ingredients_data)
+#             instructions = json.loads(instructions_data)
 
-            # إنشاء Recipe
-            recipe = Recipe.objects.create(
-                name=name,
-                course_name=course_name,
-                description=description,
-                time=time,
-                image=image
-            )
+#             # إنشاء Recipe
+#             recipe = Recipe.objects.create(
+#                 name=name,
+#                 course_name=course_name,
+#                 description=description,
+#                 time=time,
+#                 image=image
+#             )
 
-            # إنشاء Ingredients
-            for ing in ingredients:
-                Ingredient.objects.create(
-                    recipe=recipe,
-                    name=ing["name"],
-                    quantity=ing["quantity"],
-                    calories=ing.get("calories", 0)
-                )
+#             # إنشاء Ingredients
+#             for ing in ingredients:
+#                 Ingredient.objects.create(
+#                     recipe=recipe,
+#                     name=ing["name"],
+#                     quantity=ing["quantity"],
+#                     calories=ing.get("calories", 0)
+#                 )
 
-            # إنشاء Instructions
-            for step in instructions:
-                Instruction.objects.create(
-                    recipe=recipe,
-                    step=step
-                )
+#             # إنشاء Instructions
+#             for step in instructions:
+#                 Instruction.objects.create(
+#                     recipe=recipe,
+#                     step=step
+#                 )
 
-            return Response({"message": "Recipe created successfully."}, status=status.HTTP_201_CREATED)
+        #     return Response({"message": "Recipe created successfully."}, status=status.HTTP_201_CREATED)
 
-        except Exception as e:
-            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        # except Exception as e:
+        #     return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 

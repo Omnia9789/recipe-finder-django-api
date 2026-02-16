@@ -19,7 +19,8 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
-from .views import RecipeCreateView
+# from recipes.views import RecipeCreateView
+
     
     
 urlpatterns = [
@@ -29,7 +30,7 @@ urlpatterns = [
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
-urlpatterns = [
-    path('api/recipes/', RecipeCreateView.as_view(), name='create-recipe'),
-]
+# urlpatterns = [
+#     path('api/recipes/', RecipeCreateView.as_view(), name='create-recipe'),
+# ]
 
